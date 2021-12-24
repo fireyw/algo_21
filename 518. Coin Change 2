@@ -1,0 +1,33 @@
+// https://leetcode.com/problems/coin-change-2/
+/**
+ * @param {number} amount
+ * @param {number[]} coins
+ * @return {number}
+ */
+var change = function (amount, coins) {
+    let dp = new Array(amount + 1).fill(0);
+
+    dp[0]=1;
+    for(let coin of coins){
+        for(let x=coin; x<=amount; x++ ){
+            dp[x]+=dp[x-coin]
+        }
+        console.log(dp);
+    }
+    return dp[amount];
+};
+console.log(change(10, [1, 2, 5]));
+
+// var changeDFS = function(amount, coins) {
+//
+//     let dfs = function(amount, id) {
+//         console.log('amount: ',amount,',id: ', id);
+//         if (amount == 0) return 1;
+//         if (id >= coins.length || amount < 0) return 0;
+//         return dfs(amount, id+1) + dfs(amount - coins[id], id);
+//     }
+//     return dfs(amount, 0);
+// };
+
+
+// console.log(changeDFS(6, [2, 3, 4]));
